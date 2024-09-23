@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<title>List of Books</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
+</head>
+<body style="padding: 8px">
+	<div style="display: flex; justify-content: space-between;">
+	<h1>Books</h1>
+		<h3>Welcome <span sec:authentication="name"></span></h3>
+	<div style="width: fit-content">
+		<form th:action="@{/logout}" method="post" >
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+	</div>
+	<p>
+		<table class="table table-striped">
+			<tbody>
+				<tr>
+					<th>Title</th>
+					<th>Author</th>
+					<th>Publication</th>
+					<th >ISBN</th>
+					<th>Price (€)</th>
+					<th>Category</th>
+					<th sec:authorize="hasAuthority('ADMIN')"> </th>
+					<th></th>
+				</tr>
+				<tr th:each="book : ${listOfBooks}">
+					<td th:text="${book.getTitle()}">Title</td>
+					<td th:text="${book.getAuthor()}">Author</td>
+					<td th:text="${book.getPublicationYear()}">PublicationYear</td>
+					<td th:text="${book.getIsbn()}">ISBN</td>
+					<td th:text="${book.getPrice()}">Price</td>
+					<td th:text="${book.category} ? ${book.category.getName()} : ''">Category</td>
+					<td sec:authorize="hasAuthority('ADMIN')">
+						<button type="button" class="btn btn-danger" th:onclick="|window.location.href='/deletebook/${book.id}'|">Delete</button>
+					</td>	
+					<td>
+						<button type="button" class="btn btn-secondary" th:onclick="|window.location.href='/editbook/${book.id}'|">Edit</button>
+					</td>										
+					</tr>
+			</tbody>
+		</table>	
+	</p>
+	<p><button type="button" class="btn btn-success" th:onclick="window.location.href='/addbook'">New Book</button></p>
+</body>
+</html>
