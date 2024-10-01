@@ -19,4 +19,22 @@ public class User {
  private String passwordHash;
  @Column(name = "role", nullable = false)
  private String role;
+
+public String getRole() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getRole'");
+}
+public String getPasswordHash() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getPasswordHash'");
+}
+public void setRole(String string) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'setRole'");
+}
+public void setPasswordHash(String hashPwd) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'setPasswordHash'");
+}
+
 }
